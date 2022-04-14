@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Garbanzos</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+</head>
+<body>
+<header class="head">
+    <h1> Pruebas a Django </h1>
+</header>
+
+<main class="content">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <h3> Regalado Dubón, Rubén Alexander </h3>
+</footer>
+</body>
+</html>
