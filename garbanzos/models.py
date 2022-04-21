@@ -1,21 +1,33 @@
-from mongoengine import Document, fields
-from mongoengine.fields import StringField, FloatField, ListField, DateField
+from djongo.models import Model
+from djongo.models import *
+from djongo.models import fields
 
 
-class Libros(Document):
+class Bill(Model):
+    class Meta:
+        abstract = True
+
+
+class Users(Model):
     _id = fields.ObjectId()
-    autor = StringField()
-    titulo = StringField()
-    codigo = FloatField()
-    editorial = ListField()
-
-
-class Users(Document):
-    _id = fields.ObjectId()
-    name = StringField()
-    lastname = StringField()
-    shadow = StringField()
+    name = CharField(max_length=20)
+    lastname = CharField(max_length=20)
+    shadow = CharField(max_length=20)
     birthdate = DateField()
 
-    bills = ListField()
-    address = ListField()
+    bills = ArrayField(
+        model_container=Bill
+    )
+    address = ArrayField(
+        model_container=Bill
+    )
+
+
+class Products(Model):
+    _id = fields.ObjectId()
+    name = CharField(max_length=30)
+    price = FloatField()
+    preview = FileField()
+
+    stock = IntegerField()
+    category = fields.ObjectId()

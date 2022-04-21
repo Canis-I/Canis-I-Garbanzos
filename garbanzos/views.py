@@ -23,6 +23,6 @@ def create_user(request):
 
         return serializer.errors
     else:
-        user = Users.objects.get(pk='none')
-        serializer = UserSerializer(user)
+        user = Users.objects.all()
+        serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
