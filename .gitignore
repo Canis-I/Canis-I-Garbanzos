@@ -257,3 +257,5 @@ fabric.properties
 
 
 *.sqlite3
+
+upload/
