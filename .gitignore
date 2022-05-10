@@ -259,3 +259,5 @@ fabric.properties
 *.sqlite3
 
 upload/
+
+static/vue/*

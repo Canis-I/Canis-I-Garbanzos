@@ -11,12 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -34,6 +32,18 @@ ALLOWED_HOSTS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
+VUE_FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'vue/',  # must end with slash
+        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,9 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'colorfield',
+    'webpack_loader',
     'garbanzos.apps.GarbanzosConfig',
-
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,8 +76,7 @@ ROOT_URLCONF = 'gshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,7 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gshop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -90,7 +100,6 @@ DATABASES = {
         'NAME': config('DATABASE'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -110,18 +119,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -134,7 +141,8 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = "/srv/http/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+# Base url to serve media files
+MEDIA_URL = '/media/'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

@@ -1,28 +1,53 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Router from "vue-router";
+import Home from "@/components/Home";
+import Shop from "@/components/Shop";
+import Product from "@/components/Product";
+import Blog from "@/components/BlogEntry";
+import Post from "@/components/Post";
+import Cart from "@/components/Cart";
+import Layout from "@/components/Layout";
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-];
-
-const router = new VueRouter({
-  routes,
+export default new Router({
+  routes: [
+    {
+      path: "/",
+      component: Layout,
+      children: [
+        {
+          path: "/",
+          component: Home,
+          name: "Home",
+        },
+        {
+          path: "/garbanzos_shop",
+          component: Shop,
+          name: "Shop",
+        },
+        {
+          path: "/garbanzos_product",
+          component: Product,
+          name: "Product",
+        },
+        {
+          path: "/garbanzos_blog",
+          component: Blog,
+          name: "Blog",
+        },
+        {
+          path: "/garbanzos_post",
+          component: Post,
+          name: "Post",
+        },
+        {
+          path: "/garbanzos_cart",
+          component: Cart,
+          name: "Cart",
+        },
+      ],
+    },
+  ],
+  mode: "history",
 });
-
-export default router;
