@@ -41,7 +41,6 @@ def get_product(request):
 
 @api_view(['GET'])
 def carousel_config(request):
-    images = Carousel.objects.filter(active=True).values()
-    print(images)
+    images = Carousel.objects.all()
     serializer = CarouselSerializer(images, many=True)
     return JsonResponse({'images': serializer.data})

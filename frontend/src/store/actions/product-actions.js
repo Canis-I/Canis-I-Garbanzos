@@ -14,6 +14,17 @@ const actions = {
 
     commit(types.changeActiveInfo, resp.data["product"]);
   },
+  [types.requestCarousel]: async function ({ commit }) {
+    const resp = await api.getCarousel();
+    if (resp.data.status === 0) return 0;
+
+    let tmp = [];
+    resp.data["images"].forEach((e) => {
+      if (e.active) tmp.push(e);
+    });
+
+    commit(types.changeCarouselImages, tmp);
+  },
   [types.requestAll]: async function ({ commit }) {
     const resp = await api.getAllProducts();
     if (!resp) return false;

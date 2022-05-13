@@ -38,6 +38,7 @@ function makeState() {
         other_images: [],
       },
     },
+    carousel: [],
   };
 }
 export default makeState;

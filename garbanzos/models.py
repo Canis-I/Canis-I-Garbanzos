@@ -94,6 +94,8 @@ class Products(Model):
     stock = PositiveIntegerField()
     objects = ProductManager()
 
+    active = BooleanField(default=True)
+
     category = ForeignKey(
         Category,
         on_delete=models.CASCADE,

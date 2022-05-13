@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'colorfield',
     'webpack_loader',
     'garbanzos.apps.GarbanzosConfig',
+    'blog.apps.BlogConfig',
 ]
 
 
@@ -139,7 +140,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, STATIC_URL)
 ]
 
-STATIC_ROOT = "/srv/http/"
+STATIC_ROOT = "httpd/"
 
 # Base url to serve media files
 MEDIA_URL = '/media/'

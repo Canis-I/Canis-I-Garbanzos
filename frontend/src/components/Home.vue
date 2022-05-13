@@ -1,31 +1,11 @@
 <template>
   <div>
     <v-carousel hide-delimiters>
-      <v-carousel-item :src="require('../assets/prod_img/home/slider4.jpg')">
-        <v-row class="fill-height" align="center" justify="center">
-          <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
-            <strong>Upto 60% + Extra 10%</strong>
-          </div>
-          <br />
-        </v-row>
-      </v-carousel-item>
-      <v-carousel-item :src="require('../assets/prod_img/home/slider2.jpg')">
-        <v-row class="fill-height" align="center" justify="center">
-          <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
-            <strong>Upto 60% + Extra 10%</strong>
-          </div>
-          <br />
-        </v-row>
-      </v-carousel-item>
-      <v-carousel-item :src="require('../assets/prod_img/home/slider3.jpg')">
-        <v-row class="fill-height" align="center" justify="center">
-          <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
-            <strong>Upto 60% + Extra 10%</strong>
-          </div>
-          <br />
-        </v-row>
-      </v-carousel-item>
-      <v-carousel-item :src="require('../assets/prod_img/home/slider1.jpg')">
+      <v-carousel-item
+        v-for="(slide, index) in carousel"
+        :key="index"
+        :src="'http://localhost:8000' + slide.image"
+      >
         <v-row class="fill-height" align="center" justify="center">
           <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
             <strong>Upto 60% + Extra 10%</strong>
@@ -99,17 +79,21 @@
         </div>
       </div>
       <div class="text-center mt-12">
-        <v-pagination v-model="page" :length="6"></v-pagination>
+        <v-pagination v-model="page" :length="products.length / 10" />
       </div>
     </v-container>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import types from "@/store/types";
 
 export default {
   name: "ContainerHome",
+  mounted() {
+    this.requestCarousel();
+  },
   data() {
     return {
       activeBtn: 1,
@@ -145,7 +129,11 @@ export default {
   computed: {
     ...mapState({
       products: (state) => state.app.products,
+      carousel: (state) => state.carousel,
     }),
+  },
+  methods: {
+    ...mapActions([types.requestCarousel]),
   },
 };
 </script>

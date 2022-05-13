@@ -20,7 +20,25 @@ async function getProduct(id) {
   }
 }
 
+async function getCarousel() {
+  try {
+    return await axios.get("/carousel");
+  } catch (e) {
+    return false;
+  }
+}
+
+async function getCategories() {
+  try {
+    return await axios.get("/categories");
+  } catch (e) {
+    return false;
+  }
+}
+
 export default {
   getProduct,
   getAllProducts,
+  getCarousel,
+  getCategories,
 };

@@ -7,6 +7,9 @@ const internal = {
   [types.changeActiveInfo]: function (state, payload) {
     state.products.active = payload;
   },
+  [types.changeCarouselImages]: function (state, payload) {
+    state.carousel = payload;
+  },
 };
 
 const external = {
