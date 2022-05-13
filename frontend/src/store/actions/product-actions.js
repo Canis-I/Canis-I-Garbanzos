@@ -8,27 +8,26 @@ const actions = {
   [types.unsetActive]: function ({ commit }) {
     commit(types.changeActive, -1);
   },
-  [types.requestDesc]: async function ({ commit }, uri) {
-    const resp = await api.getRaw(uri, "prod");
+  [types.requestDesc]: async function ({ commit }, id) {
+    const resp = await api.getProduct(id);
     if (resp.data.status === 0) return 0;
 
-    commit(types.changeActiveInfo, resp.data.data);
+    commit(types.changeActiveInfo, resp.data["product"]);
   },
   [types.requestAll]: async function ({ commit }) {
     const resp = await api.getAllProducts();
-    const origin = "prod";
     if (!resp) return false;
 
-    const d = resp.data;
+    const products = resp.data["products"];
     const host = "http://localhost:8000"; //window.location.origin;
-    for (let i = 0; i < d.length; i++) {
-      const img = await api.getImage(d[i].preview, origin);
-
+    for (let i = 0; i < products.length; i++) {
       commit(types.appendProduct, {
-        title: d[i].name,
-        price: d[i].price,
-        image: `${host}/${img.data.data}`,
-        content: d[i].desc,
+        id: products[i].id,
+        title: products[i].title,
+        price: products[i].price,
+        image: host + products[i].image,
+        content: products[i].detail,
+        category: products[i].category,
       });
     }
   },

@@ -27,7 +27,7 @@ export default new Router({
           name: "Shop",
         },
         {
-          path: "/garbanzos_product",
+          path: "/garbanzos_product/:id(\\d+)*",
           component: Product,
           name: "Product",
         },

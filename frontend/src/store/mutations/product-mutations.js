@@ -5,7 +5,7 @@ const internal = {
     state.app.active = payload;
   },
   [types.changeActiveInfo]: function (state, payload) {
-    state.app.product.content = payload;
+    state.products.active = payload;
   },
 };
 

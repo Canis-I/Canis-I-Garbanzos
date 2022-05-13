@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-carousel hide-delimiters>
-      <v-carousel-item :src="require('../assets/img/home/slider4.jpg')">
+      <v-carousel-item :src="require('../assets/prod_img/home/slider4.jpg')">
         <v-row class="fill-height" align="center" justify="center">
           <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
             <strong>Upto 60% + Extra 10%</strong>
@@ -9,7 +9,7 @@
           <br />
         </v-row>
       </v-carousel-item>
-      <v-carousel-item :src="require('../assets/img/home/slider2.jpg')">
+      <v-carousel-item :src="require('../assets/prod_img/home/slider2.jpg')">
         <v-row class="fill-height" align="center" justify="center">
           <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
             <strong>Upto 60% + Extra 10%</strong>
@@ -17,7 +17,7 @@
           <br />
         </v-row>
       </v-carousel-item>
-      <v-carousel-item :src="require('../assets/img/home/slider3.jpg')">
+      <v-carousel-item :src="require('../assets/prod_img/home/slider3.jpg')">
         <v-row class="fill-height" align="center" justify="center">
           <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
             <strong>Upto 60% + Extra 10%</strong>
@@ -25,7 +25,7 @@
           <br />
         </v-row>
       </v-carousel-item>
-      <v-carousel-item :src="require('../assets/img/home/slider1.jpg')">
+      <v-carousel-item :src="require('../assets/prod_img/home/slider1.jpg')">
         <v-row class="fill-height" align="center" justify="center">
           <div class="display-2 white--text pl-5 pr-5 hidden-sm-only">
             <strong>Upto 60% + Extra 10%</strong>
@@ -67,7 +67,7 @@
                 class="white--text align-end"
                 :aspect-ratio="16 / 9"
                 height="200px"
-                :src="pro.src"
+                :src="pro.image"
               >
                 <v-card-title>{{ pro.type }} </v-card-title>
                 <v-expand-transition>
@@ -76,7 +76,11 @@
                     class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
                     style="height: 100%"
                   >
-                    <v-btn v-if="hover" href="/product" class="" outlined
+                    <v-btn
+                      v-if="hover"
+                      :href="'/garbanzos_product/' + pro.id"
+                      class=""
+                      outlined
                       >VIEW</v-btn
                     >
                   </div>
@@ -102,6 +106,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "ContainerHome",
   data() {
@@ -134,93 +140,12 @@ export default {
       ],
       min: 0,
       max: 10000,
-      products: [
-        {
-          id: 1,
-          name: "BLACK TEE",
-          type: "Jackets",
-          price: "18.00",
-          src: "http://localhost:8000/media/prod_img/1.jpg",
-        },
-        {
-          id: 2,
-          name: "WHITE TEE",
-          type: "Polo",
-          price: "40.00",
-          src: require("../assets/img/shop/2.jpg"),
-        },
-        {
-          id: 3,
-          name: "Zara limited...",
-          type: "Denim",
-          price: "25.00",
-          src: require("../assets/img/shop/3.jpg"),
-        },
-        {
-          id: 4,
-          name: "SKULL TEE",
-          type: "Jackets",
-          price: "30.00",
-          src: require("../assets/img/shop/4.jpg"),
-        },
-        {
-          id: 5,
-          name: "MANGO WINTER",
-          type: "Sweaters",
-          price: "50.00",
-          src: require("../assets/img/shop/5.jpg"),
-        },
-        {
-          id: 6,
-          name: "SHIRT",
-          type: "Denim",
-          price: "34.00",
-          src: require("../assets/img/shop/6.jpg"),
-        },
-        {
-          id: 7,
-          name: "TRUCKER JACKET",
-          type: "Jackets",
-          price: "38.00",
-          src: require("../assets/img/shop/7.jpg"),
-        },
-        {
-          id: 8,
-          name: "COATS",
-          type: "Jackets",
-          price: "25.00",
-          src: require("../assets/img/shop/8.jpg"),
-        },
-        {
-          id: 9,
-          name: "MANGO WINTER",
-          type: "Sweaters",
-          price: "50.00",
-          src: require("../assets/img/shop/9.jpg"),
-        },
-        {
-          id: 10,
-          name: "SHIRT",
-          type: "Denim",
-          price: "34.00",
-          src: require("../assets/img/shop/10.jpg"),
-        },
-        {
-          id: 11,
-          name: "TRUCKER JACKET",
-          type: "Jackets",
-          price: "38.00",
-          src: require("../assets/img/shop/11.jpg"),
-        },
-        {
-          id: 12,
-          name: "COATS",
-          type: "Jackets",
-          price: "25.00",
-          src: require("../assets/img/shop/12.jpg"),
-        },
-      ],
     };
+  },
+  computed: {
+    ...mapState({
+      products: (state) => state.app.products,
+    }),
   },
 };
 </script>

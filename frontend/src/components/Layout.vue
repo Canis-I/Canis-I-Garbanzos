@@ -3,12 +3,12 @@
     <v-main>
       <v-bottom-navigation :value="activeBtn" color="primary" horizontal>
         <a href="/" class="v-btn">
-          <span>Home</span>
+          <span>Inicio</span>
         </a>
         <v-menu open-on-hover offset-y>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">
-              <span>Shop</span>
+              <span>Categorías</span>
             </v-btn>
           </template>
           <v-card class="mx-auto" max-width="344" outlined>
@@ -21,9 +21,6 @@
             </v-list-item>
           </v-card>
         </v-menu>
-        <a href="/garbanzos_product" class="v-btn">
-          <span>Product</span>
-        </a>
         <v-btn href="/garbanzos_blog">
           <span>Blog</span>
         </v-btn>

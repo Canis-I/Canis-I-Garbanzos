@@ -2,7 +2,7 @@ import axios from "@/api/config";
 
 async function getAllProducts() {
   try {
-    return await axios.get("/product");
+    return await axios.get("/products");
   } catch (e) {
     return false;
   }

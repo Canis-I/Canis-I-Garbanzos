@@ -15,3 +15,10 @@ admin.site.register(Category)
 admin.site.register(Color)
 admin.site.register(Brand)
 
+
+class CarouselManager(admin.ModelAdmin):
+    list_display = ['title', 'active']
+    list_editable = ['active']
+
+
+admin.site.register(Carousel, CarouselManager)

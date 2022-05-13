@@ -21,7 +21,7 @@
                     <v-list-item key="1">
                       <v-list-item-avatar>
                         <v-img
-                          :src="require('../assets/img/shop/1.jpg')"
+                          src="http://localhost:8000/media/prod_img/1.jpg"
                         ></v-img>
                       </v-list-item-avatar>
 
@@ -51,7 +51,7 @@
                     <v-list-item key="1">
                       <v-list-item-avatar>
                         <v-img
-                          :src="require('../assets/img/shop/2.jpg')"
+                          src="http://localhost:8000/media/prod_img/2.jpg"
                         ></v-img>
                       </v-list-item-avatar>
 

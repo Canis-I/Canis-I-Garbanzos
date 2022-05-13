@@ -10,7 +10,7 @@
           <v-img
             class="white--text align-end"
             height="400px"
-            :src="require('../assets/img/home/slider2.jpg')"
+            :src="require('../assets/prod_img/home/slider2.jpg')"
           ></v-img>
           <p class="display-1 mb-0 pt-5">Lorem ipsum</p>
           <p class="pt-5 subtitle-1 font-weight-light">
@@ -38,7 +38,7 @@
           <v-img
             class="white--text align-end"
             height="400px"
-            :src="require('../assets/img/home/slider3.jpg')"
+            :src="require('../assets/prod_img/home/slider3.jpg')"
           ></v-img>
           <p class="display-1 mb-0 pt-5">Lorem ipsum</p>
           <p class="subtitle-1 font-weight-light pt-5">

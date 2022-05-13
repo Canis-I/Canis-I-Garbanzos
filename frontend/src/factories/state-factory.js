@@ -9,10 +9,12 @@ function makeState() {
       },
       products: [],
       product: {
+        id: 0,
         title: "",
         content: "",
         price: 0,
         image: "",
+        category: "",
       },
       histories: [],
       history: {
@@ -21,18 +23,20 @@ function makeState() {
         preview: "",
       },
     },
-    users: {
-      active: "login",
-      user: {
-        credential: "",
-        phone: "",
-        usr: "",
-        pass: "",
-      },
-      logged: false,
-    },
     histories: {
       active: [],
+    },
+    products: {
+      active: {
+        id: 0,
+        title: "",
+        content: "",
+        price: 0,
+        image: "",
+        category: "",
+        spec: "",
+        other_images: [],
+      },
     },
   };
 }

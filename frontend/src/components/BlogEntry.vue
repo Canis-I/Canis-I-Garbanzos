@@ -10,7 +10,7 @@
             <v-img
               class="white--text align-end"
               height="400px"
-              :src="require('../assets/img/home/slider2.jpg')"
+              src="http://localhost:8000/media/home/slider2.jpg"
             >
               <v-card-title>Top 10 Fashion of the Week</v-card-title>
             </v-img>
@@ -36,7 +36,7 @@
             <v-img
               class="white--text align-end"
               height="400px"
-              :src="require('../assets/img/home/slider3.jpg')"
+              src="http://localhost:8000/media/home/slider3.jpg"
             >
               <v-card-title>Best brands for fashion</v-card-title>
             </v-img>
@@ -62,7 +62,7 @@
             <v-img
               class="white--text align-end"
               height="400px"
-              :src="require('../assets/img/home/slider4.jpg')"
+              src="http://localhost:8000/media/home/slider4.jpg"
             >
               <v-card-title>Fashion Tips & Tricks</v-card-title>
             </v-img>

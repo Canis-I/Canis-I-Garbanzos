@@ -7,6 +7,7 @@ from colorfield.fields import ColorField
 brand_path = "brand_img"
 product_path = "prod_img"
 categories_path = "cat_img"
+carousel_path = "car_img"
 
 
 # Categories
@@ -68,6 +69,8 @@ class ProductImages(Model):
     id = fields.AutoField(auto_created=True, primary_key=True)
     title = CharField(max_length=100, verbose_name="Título")
     image = ImageField(upload_to=product_path, verbose_name="Imágen")
+
+    path = image.name
 
     class Meta:
         verbose_name = "Imágen de producto"
@@ -141,3 +144,17 @@ class Bill(Model):
     id = fields.AutoField(auto_created=True, primary_key=True)
     date = DateField()
     count = IntegerField()
+
+
+class Carousel(Model):
+    id = fields.AutoField(auto_created=True, primary_key=True)
+    title = CharField(max_length=100, verbose_name="Nombre")
+    image = ImageField(upload_to=carousel_path, verbose_name="Imágen")
+    active = BooleanField(verbose_name="Activo")
+
+    class Meta:
+        verbose_name = "Imágen para baner"
+        verbose_name_plural = "Imágenes para baner"
+
+    def __str__(self):
+        return self.title
