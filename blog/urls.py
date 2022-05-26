@@ -3,6 +3,7 @@ from . import views, controllers
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    # re_path(r'^garbanzos_(.*)$', views.router, name='garbanzos'),
+    path('blog', views.index),
+    path(r'blog/entries', controllers.get_blog, name='index'),
+    path('blog/entry', views.index, name='index'),
 ]

@@ -2,12 +2,6 @@ from rest_framework.serializers import ModelSerializer, StringRelatedField
 from .models import *
 
 
-class UserSerializer(ModelSerializer):
-    class Meta:
-        model = Users
-        fields = '__all__'
-
-
 class ImageSerializer(ModelSerializer):
     class Meta:
         model = ProductImages
@@ -30,3 +24,9 @@ class CarouselSerializer(ModelSerializer):
     class Meta:
         model = Carousel
         fields = '__all__'
+
+
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('title', 'id',)

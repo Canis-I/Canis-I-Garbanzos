@@ -1,0 +1,37 @@
+{
+  "status": "done",
+  "assets": {
+    "css/main.css": {
+      "name": "css/main.css",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/css/main.css"
+    },
+    "js/main.js": {
+      "name": "js/main.js",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/js/main.js"
+    },
+    "css/chunk-vendors.css": {
+      "name": "css/chunk-vendors.css",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/css/chunk-vendors.css"
+    },
+    "js/chunk-vendors.js": {
+      "name": "js/chunk-vendors.js",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/js/chunk-vendors.js"
+    },
+    "favicon.ico": {
+      "name": "favicon.ico",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/favicon.ico"
+    },
+    "index.html": {
+      "name": "index.html",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/index.html"
+    }
+  },
+  "chunks": {
+    "main": [
+      "css/chunk-vendors.css",
+      "js/chunk-vendors.js",
+      "css/main.css",
+      "js/main.js"
+    ]
+  }
+}

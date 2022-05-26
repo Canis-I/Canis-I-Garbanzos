@@ -260,4 +260,10 @@ fabric.properties
 
 upload/
 
+# Generated files
 static/vue/*
+static/vue/
+static/garbanzos/
+static/garbanzos/*
+static/blog/
+static/blog/*

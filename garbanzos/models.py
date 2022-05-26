@@ -21,7 +21,6 @@ class CategoryManager(Manager):
 class Category(Model):
     id = fields.AutoField(auto_created=True, primary_key=True)
     title = CharField(max_length=100, verbose_name="Título")
-    image = ImageField(upload_to=categories_path, verbose_name="Imágen")
 
     objects = CategoryManager()
 
@@ -36,7 +35,6 @@ class Category(Model):
 # Product
 class Brand(Model):
     title = CharField(max_length=100, verbose_name="Título")
-    image = ImageField(upload_to=brand_path, verbose_name="Imágen")
 
     class Meta:
         verbose_name = "Marca"
@@ -126,31 +124,9 @@ class Products(Model):
         return self.title
 
 
-class Users(Model):
-    id = fields.AutoField(auto_created=True, primary_key=True)
-    name = CharField(max_length=20)
-    lastname = CharField(max_length=20)
-    shadow = CharField(max_length=20)
-    birthdate = DateField()
-
-
-class ProductBill(Model):
-    product = ForeignKey(Products, on_delete=CASCADE)
-    count = PositiveIntegerField()
-
-    class Meta:
-        abstract = True
-
-
-class Bill(Model):
-    id = fields.AutoField(auto_created=True, primary_key=True)
-    date = DateField()
-    count = IntegerField()
-
-
 class Carousel(Model):
     id = fields.AutoField(auto_created=True, primary_key=True)
-    title = CharField(max_length=100, verbose_name="Nombre")
+    title = CharField(max_length=100, verbose_name="Texto")
     image = ImageField(upload_to=carousel_path, verbose_name="Imágen")
     active = BooleanField(verbose_name="Activo")
 

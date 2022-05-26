@@ -2,26 +2,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
 from bson import ObjectId
-from .models import Users, Products, Carousel
+from .models import Products, Carousel
 from django.http import JsonResponse
-
-
-@api_view(['POST', 'GET'])
-def create_user(request):
-    if request.method == 'POST':
-        user = Users()
-        user.name = "Ruben"
-        user.lastname = "Regalado"
-        user.bills = [{"count": 5, "_id": ObjectId()}]
-        user.shadow = "passwd"
-        user.address = [{"path": "Lotificacion loma linda", "_id": ObjectId()}]
-        user.save()
-
-        return Response(user.__str__())
-    else:
-        user = Users.objects.all()
-        serializer = UserSerializer(user, many=True)
-        return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -37,6 +19,13 @@ def get_product(request):
     products = Products.objects.get(pk=var)
     serializer = ProductSerializer(products)
     return JsonResponse({'product': serializer.data})
+
+
+@api_view(['GET'])
+def get_categories(request):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return JsonResponse({'categories': serializer.data})
 
 
 @api_view(['GET'])

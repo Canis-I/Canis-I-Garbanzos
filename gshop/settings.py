@@ -32,17 +32,25 @@ ALLOWED_HOSTS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
-VUE_FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+VUE_FRONTEND_DIR = os.path.join(BASE_DIR, "node")
 
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'vue/',  # must end with slash
-        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR, 'webpack-stats.json'),
+        'BUNDLE_DIR_NAME': 'garbanzos/',  # must end with slash
+        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR, 'garbanzos.json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
-    }
+    },
+    'BLOG': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'blog/',  # must end with slash
+        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR, 'blog.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    },
 }
 
 INSTALLED_APPS = [
@@ -59,7 +67,6 @@ INSTALLED_APPS = [
     'garbanzos.apps.GarbanzosConfig',
     'blog.apps.BlogConfig',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
