@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay</title>
+</head>
+<body>
+{% block content %}
+    <h4>Espere un momento, estamos llendo a paypal</h4>
+    {{ form.render }}
+{% endblock %}
+
+<script>
+    function send() {
+        let form = document.getElementsByName("submit");
+        console.debug(form[0]);
+        form[0].click();
+    }
+
+    (
+        send()
+    )
+</script>
+</body>
+</html>
