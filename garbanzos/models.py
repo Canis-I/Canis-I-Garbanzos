@@ -3,6 +3,7 @@ from djongo.models import Model
 from djongo.models import *
 from djongo.models import fields
 from colorfield.fields import ColorField
+from django.contrib.auth.models import User
 
 brand_path = "brand_img"
 product_path = "prod_img"
@@ -136,3 +137,27 @@ class Carousel(Model):
 
     def __str__(self):
         return self.title
+
+
+class Bill(Model):
+    id = fields.AutoField(auto_created=True, primary_key=True)
+    product = ForeignKey(
+        Products,
+        on_delete=CASCADE,
+        verbose_name="Producto"
+    )
+
+    user = ForeignKey(
+        User,
+        on_delete=CASCADE,
+        verbose_name="Usuario"
+    )
+
+    amount = IntegerField(verbose_name="Cantidad")
+
+    class Meta:
+        verbose_name = "Compra"
+        verbose_name_plural = "Compras"
+
+    def __str__(self):
+        return "Compra de " + self.user.username

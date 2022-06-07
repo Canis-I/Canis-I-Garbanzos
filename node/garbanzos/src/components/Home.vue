@@ -19,17 +19,7 @@
 
       <v-row dense>
         <v-col cols="12" sm="8" class="pl-6 pt-6">
-          <small>Showing 1-12 of 200 products</small>
-        </v-col>
-        <v-col cols="12" sm="4">
-          <v-select
-            class="pa-0"
-            v-model="select"
-            :items="options"
-            style="margin-bottom: -20px"
-            outlined
-            dense
-          ></v-select>
+          <small>Mostrando 1-10 de {{ products.length }} productos</small>
         </v-col>
       </v-row>
 
@@ -61,7 +51,7 @@
                       :href="'/garbanzos_product/' + pro.id"
                       class=""
                       outlined
-                      >VIEW</v-btn
+                      >VER</v-btn
                     >
                   </div>
                 </v-expand-transition>
@@ -79,7 +69,7 @@
         </div>
       </div>
       <div class="text-center mt-12">
-        <v-pagination v-model="page" :length="products.length / 10" />
+        <v-pagination v-model="page" :length="pagination"> </v-pagination>
       </div>
     </v-container>
   </div>
@@ -106,18 +96,10 @@ export default {
       ],
       slides: ["First", "Second", "Third", "Fourth", "Fifth"],
       range: [0, 10000],
-      select: "Popularity",
-      options: [
-        "Default",
-        "Popularity",
-        "Relevance",
-        "Price: Low to High",
-        "Price: High to Low",
-      ],
       page: 1,
       breadcrums: [
         {
-          text: "Home",
+          text: "Inicio",
           disabled: false,
           href: "/",
         },
@@ -127,6 +109,9 @@ export default {
     };
   },
   computed: {
+    pagination() {
+      return Math.round(this.products.length / 10) + 1;
+    },
     ...mapState({
       products: (state) => state.app.products,
       carousel: (state) => state.carousel,

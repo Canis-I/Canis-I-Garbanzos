@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('garbanzos.urls')),
     path('', include('blog.urls')),
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('paypal/', include('paypal.standard.ipn.urls')),
 ]
 
 if settings.DEBUG:

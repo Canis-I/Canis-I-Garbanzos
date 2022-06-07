@@ -25,6 +25,11 @@ export default new Router({
           name: "Shop",
         },
         {
+          path: "/garbanzos_search/:text(.+)*",
+          component: Shop,
+          name: "Search",
+        },
+        {
           path: "/garbanzos_product/:id(\\d+)*",
           component: Product,
           name: "Product",

@@ -22,3 +22,10 @@ class CarouselManager(admin.ModelAdmin):
 
 
 admin.site.register(Carousel, CarouselManager)
+
+
+class BillManager(admin.ModelAdmin):
+    list_display = ['product', 'user', 'amount']
+
+
+admin.site.register(Bill, BillManager)

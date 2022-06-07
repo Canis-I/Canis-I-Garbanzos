@@ -4,14 +4,15 @@
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-12">
           <v-card outlined>
-            <v-card-title>Filters</v-card-title>
+            <v-card-title>Filtros</v-card-title>
             <v-divider></v-divider>
             <template>
               <v-treeview
                 :items="fixed"
                 :open="[1]"
-                :active="[5]"
+                :active="active"
                 :selected-color="'#fff'"
+                @update:active="onFilter"
                 activatable
                 open-on-click
                 dense
@@ -57,119 +58,93 @@
 
           <v-row dense>
             <v-col cols="12" sm="8" class="pl-6 pt-6">
-              <small>Showing 1-12 of 200 products</small>
-            </v-col>
-            <v-col cols="12" sm="4">
-              <v-select
-                class="pa-0"
-                v-model="select"
-                :items="options"
-                style="margin-bottom: -20px"
-                outlined
-                dense
-              ></v-select>
+              <small>Mostrando 1-10 de {{ products.length }} productos</small>
             </v-col>
           </v-row>
 
           <v-divider></v-divider>
 
-          <div class="row text-center">
-            <div
-              class="col-md-3 col-sm-6 col-xs-12"
-              :key="pro.id"
-              v-for="pro in products"
-            >
-              <v-hover v-slot:default="{ hover }">
-                <v-card class="mx-auto" color="grey lighten-4" max-width="600">
-                  <v-img
-                    class="white--text align-end"
-                    :aspect-ratio="16 / 9"
-                    height="200px"
-                    :src="pro.image"
-                  >
-                    <v-card-title>{{ pro.type }}</v-card-title>
-                    <v-expand-transition>
-                      <div
-                        v-if="hover"
-                        class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
-                        style="height: 100%"
-                      >
-                        <v-btn
-                          v-if="hover"
-                          :href="'/garbanzos_product/' + pro.id"
-                          class=""
-                          outlined
-                          >VIEW
-                        </v-btn>
-                      </div>
-                    </v-expand-transition>
-                  </v-img>
-                  <v-card-text class="text--primary">
-                    <div>
-                      <a href="/product" style="text-decoration: none">{{
-                        pro.name
-                      }}</a>
-                    </div>
-                    <div>${{ pro.price }}</div>
-                  </v-card-text>
-                </v-card>
-              </v-hover>
-            </div>
-          </div>
+          <products-container :products="search" v-if="isSearch" />
+          <products-container :products="products" v-else />
+
           <div class="text-center mt-12">
-            <v-pagination v-model="page" :length="6"></v-pagination>
+            <v-pagination v-model="page" :length="pagination"></v-pagination>
           </div>
         </div>
       </div>
     </v-container>
   </div>
 </template>
-<style>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.8;
-  position: absolute;
-  width: 100%;
-}
-</style>
 <script>
 import { mapState } from "vuex";
+import ProductsContainer from "@/components/ProductsContainer";
 
 export default {
   name: "ShopLayout",
+  components: { ProductsContainer },
   beforeMount() {
-    this.route = this.$route.params["id"];
-  },
-  mounted() {
-    this.breadcrums.push({
-      text: this.categories[this.route].name,
-    });
+    const params = this.$route.params;
+    let route = params["id"];
+
+    if (route === undefined) {
+      if (params["text"] !== undefined) {
+        route = params["text"];
+        this.isSearch = true;
+      } else {
+        route = false;
+      }
+    }
+
+    this.route = route;
   },
   data: () => ({
     range: [0, 10000],
     select: "Popularity",
-    options: [
-      "Default",
-      "Popularity",
-      "Relevance",
-      "Price: Low to High",
-      "Price: High to Low",
-    ],
-    route: "",
     page: 1,
+    pushed: false,
+    isSearch: false,
     breadcrums: [
       {
         text: "Inicio",
         disabled: false,
-        href: "breadcrumbs_home",
+        href: "/",
       },
     ],
     min: 0,
     max: 10000,
   }),
+  methods: {
+    onFilter(cat) {
+      console.debug(cat[0]);
+      this.$router.push(`/garbanzos_shop/${cat[0] - 1}`);
+    },
+  },
   computed: {
+    pagination() {
+      return Math.round(this.products.length / 10) + 1;
+    },
+    active() {
+      let ret = [];
+      if (this.route.match(/\d+/) !== null) {
+        ret = [this.route];
+      }
+
+      console.log(ret);
+      return ret;
+    },
+    search() {
+      const keyword = this.route;
+      let arr = this.products;
+
+      let items = [];
+      arr.forEach((e) => {
+        if (e.title.toLowerCase().includes(keyword.toLowerCase())) {
+          items.push(e);
+        }
+      });
+
+      return items;
+    },
     fixed() {
       let items = [];
 
@@ -182,6 +157,27 @@ export default {
       products: (state) => state.app.products,
       categories: (state) => state.app.categories,
     }),
+  },
+  watch: {
+    categories() {
+      if (!this.pushed && this.route) {
+        if (this.route.match(/\d+/) === null) {
+          this.breadcrums.push({
+            text: "Buscar",
+            disabled: true,
+            href: "#",
+          });
+        } else {
+          this.breadcrums.push({
+            text: this.categories[this.route].title,
+            disabled: true,
+            href: "#",
+          });
+        }
+
+        this.pushed = true;
+      }
+    },
   },
 };
 </script>

@@ -26,6 +26,47 @@
         continue.</strong>
 </noscript>
 
+<header style="height: 5em; margin-top: 0; transform: translateY(0); left: 0; right: 0;" data-booted="true">
+    <div class="v-toolbar__content" style="height: 64px;">
+        <div class="v-toolbar__title" style="width: 350px;">
+            <img src="{% static 'logo.png' %}" alt="logo" height="50" width="50" onclick="to_home()">
+        </div>
+        <div class="v-input hidden-sm-and-down pl-10 ml-4 v-input--hide-details theme--dark v-text-field v-text-field--single-line v-text-field--solo v-text-field--solo-inverted v-text-field--solo-flat v-text-field--is-booted v-text-field--enclosed">
+            <div class="v-input__control">
+                <div class="v-input__slot">
+                    <div class="v-text-field__slot">
+                        <label for="search" class="v-label theme--dark"
+                               style="left: 0; right: auto; position: absolute;">
+                        </label>
+                        <input id="search" type="text" onkeydown="search(event)" placeholder="Buscar">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        {% if not user.is_authenticated %}
+            <a href="/login" class="v-btn v-btn--icon v-btn--round theme--dark v-size--default">
+                <span class="v-btn__content">
+                    <img src="{% static 'user.png' %}" alt="usr" height="35" width="35">
+                </span>
+            </a>
+        {% else %}
+            <a href="/logout" class="v-btn v-btn--icon v-btn--round theme--dark v-size--default">
+                <span class="v-btn__content">
+                    <img src="{% static 'logout.png' %}" alt="usr" height="35" width="35">
+                </span>
+            </a>
+        {% endif %}
+        <a href="/garbanzos_cart" class="v-btn v-btn--icon v-btn--round theme--dark v-size--default">
+            <span class="v-btn__content">
+                <span class="v-badge v-badge--overlap theme--dark">
+                    <img src="{% static 'cart.png' %}" alt="usr" height="35" width="35">
+                </span>
+            </span>
+        </a>
+    </div>
+</header>
+
 <div>
     <app id="app"></app>
 </div>
@@ -51,12 +92,21 @@
             <div class="col">
                 <h3>Contactanos:</h3>
                 <ul class="footer-links">
-                    {#                    <li>#}
-                    {#                        <a href="https://www.instagram.com/pachamamaartesanias03/">#}
-                    {#                            @pachamamaartesanias03#}
-                    {#                            <b-icon-instagram/>#}
-                    {#                        </a>#}
-                    {#                    </li>#}
+                    <li>
+                        <a href="mailto:garbanzos.store@gmail.com">
+                            Correo: garbanzos.store@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/garbanzos.store/">
+                            Instagram @garbanzos.store
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/Garbanzos-store-105597602176548">
+                            Facebook Garbanzos Store
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -72,5 +122,18 @@
     </div>
 </footer>
 <!-- built files will be auto injected -->
+
+<script>
+    function search(e) {
+        if (e.keyCode !== 13) return;
+        const args = document.getElementById("search")
+
+        window.location = `/garbanzos_search/${args.value}`
+    }
+
+    function to_home() {
+        window.location = "/";
+    }
+</script>
 </body>
 </html>

@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'garbanzos.apps.GarbanzosConfig',
     'blog.apps.BlogConfig',
+    'paypal.standard.ipn'
 ]
 
 MIDDLEWARE = [
@@ -104,8 +105,8 @@ WSGI_APPLICATION = 'gshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': config('DATABASE'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':  os.path.join(BASE_DIR, config('DATABASE')),
     }
 }
 
@@ -147,10 +148,16 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, STATIC_URL)
 ]
 
-STATIC_ROOT = "httpd/"
+STATIC_ROOT = "/home/rc-regalado/static/"
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+DEFAULT_AUTO_FIELD = "djongo.models.AutoField"
+
+PAYPAL_RECEIVER_EMAIL = 'ruben.ard28@gmail.com'
+
+PAYPAL_TEST = True
