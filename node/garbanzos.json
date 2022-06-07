@@ -1,6 +1,22 @@
 {
   "status": "done",
   "assets": {
+    "fonts/MaterialIcons-Regular.eot": {
+      "name": "fonts/MaterialIcons-Regular.eot",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/fonts/MaterialIcons-Regular.eot"
+    },
+    "fonts/MaterialIcons-Regular.woff2": {
+      "name": "fonts/MaterialIcons-Regular.woff2",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/fonts/MaterialIcons-Regular.woff2"
+    },
+    "fonts/MaterialIcons-Regular.woff": {
+      "name": "fonts/MaterialIcons-Regular.woff",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/fonts/MaterialIcons-Regular.woff"
+    },
+    "fonts/MaterialIcons-Regular.ttf": {
+      "name": "fonts/MaterialIcons-Regular.ttf",
+      "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/fonts/MaterialIcons-Regular.ttf"
+    },
     "css/main.css": {
       "name": "css/main.css",
       "path": "/home/rc-regalado/git/PycharmProjects/gshop/static/garbanzos/css/main.css"

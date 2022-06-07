@@ -18,33 +18,29 @@
             <v-card-actions class="pa-0">
               <p class="headline font-weight-light pt-3">
                 ${{ product.price }}
-                <!--<del style="" class="subtitle-1 font-weight-thin">{{ product.price }}</del>-->
+                <del style="" class="subtitle-1 font-weight-thin">
+                  ${{ discount }}
+                </del>
               </p>
             </v-card-actions>
             <p class="subtitle-1 font-weight-thin">
               {{ product.detail }}
             </p>
-            <p class="title">Tamaño</p>
-            <v-radio-group v-model="row" row>
-              <v-radio label="XS" value="XS"></v-radio>
-              <v-radio label="S" value="s"></v-radio>
-              <v-radio label="M" value="m"></v-radio>
-              <v-radio label="L" value="l"></v-radio>
-              <v-radio label="XL" value="xl"></v-radio>
-            </v-radio-group>
             <p class="title">Cantidad</p>
 
-            <v-text-field
+            <input style="width: 100px" v-model="amount" type="number" />
+            <br />
+            <br />
+            <v-btn
+              class="primary white--text"
               outlined
-              style="width: 100px"
-              :value="1"
+              tile
               dense
-            ></v-text-field>
-            <v-btn class="primary white--text" outlined tile dense>
-              <v-icon>mdi-cart</v-icon>
+              :href="`/buy/${product.id}/${amount}`"
+            >
               Comprar
             </v-btn>
-            <v-btn class="ml-4" outlined tile>Añadir al carrito</v-btn>
+            <!--            <v-btn class="ml-4" outlined tile>Añadir al carrito</v-btn>-->
           </div>
 
           <div></div>
@@ -57,9 +53,6 @@
                 <p class="pt-10 subtitle-1 font-weight-thin">
                   {{ product.spec }}
                 </p>
-              </v-tab-item>
-              <v-tab-item>
-                <p class="pt-10 subtitle-1 font-weight-thin">test test test</p>
               </v-tab-item>
             </v-tabs>
           </div>
@@ -86,7 +79,6 @@ export default {
     });
   },
   data: () => ({
-    row: "",
     rating: 4.5,
     breadcrums: [
       {
@@ -95,42 +87,17 @@ export default {
         href: "breadcrumbs_home",
       },
     ],
-    item: 5,
-    items: [
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        title: "Lorem ipsum dolor?",
-        subtitle:
-          "<span class='text--primary'>Ali Connors</span> &mdash; Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Tincidunt arcu non sodales neque sodales ut etiam. Lectus arcu bibendum at varius vel pharetra. Morbi tristique senectus et netus et malesuada.\n" +
-          "\n",
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        title:
-          'Lorem ipsum dolor <span class="grey--text text--lighten-1">4</span>',
-        subtitle:
-          "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Lorem ipsum dolor",
-        subtitle:
-          "<span class='text--primary'>Sandra Adams</span> &mdash; Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Lorem ipsum dolor",
-        subtitle: "",
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-        title: "Lorem ipsum dolor",
-        subtitle:
-          "<span class='text--primary'>Britta Holt</span> &mdash; Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-    ],
+    amount: 1,
   }),
   computed: {
+    discount() {
+      const min = 1;
+      const max = 5;
+
+      const rand = Math.random() * (max - min) + min;
+
+      return this.product.price + Math.round(rand);
+    },
     images() {
       let img = [];
       img.push(this.product.image);
